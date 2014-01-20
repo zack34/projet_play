@@ -1,0 +1,25 @@
+# Users
+users:
+
+- !!models.User
+  email : zack1@gmail.com
+  name : zack1
+  password : zack1
+
+# Commentaires  
+commentaires:
+
+- !!models.Commentaire
+  commentaire : coucou
+  date : null
+  user : zack1
+  cible : zack1
+
+# Liens  
+liens:
+
+- !!models.Lien
+  lien1 : zack2
+  lien2 : zack1
+  date : null
+  

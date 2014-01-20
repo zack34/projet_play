@@ -1,0 +1,79 @@
+    @(message: String, profilX: User, user: User,liens1: List[Lien])
+
+    @main("Welcome To Tweet", user) {
+
+<legend><b><p class="text-info">@message @profilX.name </p></b></legend></br>
+
+
+
+
+
+<legend> <b> <p class="text-info">Mes Informations :</p></b></legend>
+<table class="table" >
+
+<tr class="success"><td><b>Nom</td><td> @profilX.name</td> </tr>
+<tr class="warning"><td><b>Prénom</td><td> @profilX.name</td> </tr>
+<tr class="error"><td><b>E-mail</td><td>@profilX.email</td> </tr>
+	
+</table>
+</fieldset>
+</td>
+
+<td> 
+<fieldset style="width: 150px; ">
+<legend><b><p class="text-info"> Mes Ami(e)s :</p></b></legend>
+
+<ul>@for(lien <- liens1){
+ @if(profilX.name==user.name){
+ 
+
+
+   <table class="table" >
+   
+ 
+ 
+
+   
+   
+   
+ <tr class="warning" ><td>   <span class="add-on"></span><a href="@routes.Application.SeeProfil(lien.lien2)"> @lien.lien2</a></td>
+@helper.form(action = routes.Application.delete3(lien.id)){<button class="btn btn-primary btn-sm dropdown-toggle" style="width:20px;height:26px;position: absolute;
+	top: 31em;left: 13em;"><i class="icon-black icon-trash"></i></button> 
+
+} 
+
+</tr>
+</table>
+<!-- <li> <a href="@routes.Application.SeeProfil(lien.lien2)"> @lien.lien2</a> </li> -->
+}
+@if(profilX.name != user.name){
+<fieldset style="width: 200px; ">
+
+
+
+
+<legend><b><p class="text-info"> Ajouter un ami(e) :</p></b></legend>
+@helper.form(action = routes.Tweet1.AddAMIS(user.name,profilX.name)) {<button class="btn btn-info btn" type="submit" style="width:100px;"><i class="icon-white icon-plus-sign"></i>Add Me!</button>} 
+</fieldset>
+}
+
+
+}  
+ </ul>
+
+</fieldset>
+</td>
+
+</tr>
+</table>
+
+@if(profilX.name == user.name){
+<fieldset style="width: 738px; ">
+<legend><b><p class="text-info">Modification De Mes Informations :</p></b></legend>
+<a href="@routes.Tweet1.Inscription()"><button class="btn btn-info btn" type="submit" style="width:100px;height:30px;position:absolute;top:580px;left: 120px;"><i class="icon-white icon-pencil"></i>Modifier</button></a>
+
+</fieldset>
+
+
+}
+}

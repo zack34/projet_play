@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                           controllers.Application.index()
+GET     /essai										controllers.Application.index1()
+GET     /essai2										controllers.Application.index()
+POST    /commentaire/add                            controllers.Tweet1.add()
+POST    /commentaire/add/Scommentaire/              controllers.Tweet1.addSC()
+POST    /commentaire/add/Ami                        controllers.Tweet1.AddAMIS(ami: String,ami2: String)
+POST    /commentaire/del                            controllers.Tweet1.delete(id: Long)
+POST    /SousCommentaire/del1                       controllers.Tweet1.delete2(id: Long)
+POST    /Lien/del2                        			controllers.Application.delete3(id: Long)
+POST    /recherche/user                             controllers.Application.recherche()
+POST    /organiser/                                 controllers.Application.doReview()
+POST    /organiser1/                                controllers.Application.doReview1()
+POST    /commentaire 							    controllers.Tweet1.Editer(Commentaire: String)
+GET     /SeeProfil                                  controllers.Application.SeeProfil(user: String)
+
+
+# Authentication
+GET    /login                       controllers.Authentication.login()
+POST   /login                       controllers.Authentication.authenticate()
+GET    /logout                      controllers.Authentication.logout()
+
+# Inscription
+
+POST   /Inscription                  controllers.Tweet1.SubmitInscription()
+GET    /Inscription                  controllers.Tweet1.Inscription()
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

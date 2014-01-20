@@ -1,0 +1,31 @@
+@(form: Form[Authentication.AuthenticatedUser])
+@main("Authentification", null) {
+@helper.form(routes.Authentication.authenticate) {
+<legend>Qui êtes vous!</legend>
+<div class="well">
+@if(form.hasGlobalErrors) {
+<p class="error" style="color:red;"> @form.globalError.message </p>
+}
+@if(flash.contains("success")) {
+<p class="success">@flash.get("success")</p>
+}
+
+<div class="input-prepend">
+    <span class="add-on"><i class="icon-black icon-user"></i></span>
+   <input type="email" name="email" placeholder="Email" value="@form("email").value">
+</div></br></br>
+
+<div class="input-prepend">
+    <span class="add-on"><i class="icon-black icon-lock"></i></span>
+   <input type="password" name="password" placeholder="Password">
+   <label class="checkbox">
+<input type="checkbox"> Remember me
+</label>
+</div>
+
+<p><button class="btn" type="submit">Login</button> </p> </div>
+}
+@helper.form(routes.Tweet1.Inscription) { <button class="btn-primary" type="submit">Inscription</button> }
+}
+<div name="authentication" class="alert alert-info">
+<strong>Info : </strong> Veuillez vous authentifier s'il vous plaît</div>

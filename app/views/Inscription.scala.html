@@ -1,0 +1,21 @@
+@(message: String)
+@main(message, null) {
+@helper.form(routes.Tweet1.SubmitInscription) {
+<legend>Inscrivez vous svp !</legend>
+<div class="well">
+<div class="input-prepend">
+<p><input type="name" name="name" placeholder="Name"></p>
+<p><input type="email" name="email" placeholder="Email" ></p>
+<p><input type="password" name="password" placeholder="Password"></p>
+
+
+<p><button class="btn" type="submit">Confirmer inscription</button>  </p>
+</div></div>
+}
+@helper.form(routes.Application.index()) {
+<p><button class="btn-primary" type="submit"> Home </button>  </p>
+
+         }
+
+         
+  }

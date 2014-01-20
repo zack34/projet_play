@@ -1,0 +1,173 @@
+@(message: String, commentaires: List[Commentaire], user: User, Scommentaires: List[SousCommentaire])
+ 
+@main("Welcome To Tweet", user) {
+<div style="width: 1516px; ">
+<h1>Tweet</h1>
+</div>
+
+
+<!-- Formulaire de saisie : Categories -->
+             
+<style>  
+          body {
+			padding-top: 40px;
+			padding-bottom: 40px;
+			background:url(/assets/images/fond2.jpg) ;
+			background-repeat:no-repeat;
+			 background-size: 100% 120%;
+			 
+			 }
+			
+#tab
+{
+    border: #003399 1px solid;
+}
+             </style>
+<fieldset style="width: 738px; ">
+
+<!-- Barre de recherche d'un Profles dans la table des Tweteer -->
+<legend>Recherche des profiles</legend>
+@helper.form(action = routes.Application.recherche()){
+<input  type="text"name="cible" placeholder="rechercher" class="input-medium search-query">
+<input type="submit" class="btn btn-inverse active" value="Recherche"/>}
+<!--  <button type="submit"> Rechercher</button>--> 
+</form> 
+</fieldset>
+
+
+<div class="wellll" style="top:100px;left:500px; width:300px;position:absolute;">
+<fieldset style="width: 527px;"> 
+<legend> Organiser les tweets</legend>
+
+	
+<!-- <form method="post" action="/organiser/">
+ <label for="ami" class="radio">
+ <input type="radio" name="origine" value="Sujet" id="Sujet" />Sujet </label>
+ <label for="web" class="radio"> <input type="radio" name="origine" value="id" id="id" /> id </label>
+<input type="submit" class="btn btn-inverse active" value="Valide"/>
+ </form></div>
+ </fieldset></br></br> -->
+ 
+ 
+
+<td><form method="post" action="/organiser/"">
+ <label for="ami" class="radio"><input type="radio" name="origine" value="Sujet" id="Sujet" /> Sujet </label>
+<input type="submit" class="btn btn-inverse active" value="Valide"/>
+ </form></div>
+ 
+ <div class="wellll" style="top:100px;left:800px; width:300px;position:absolute;"><br><br><br>
+<fieldset style="width: 527px;"> 
+ <td><form method="post" action="/organiser1/">
+ <label for="web" class="radio"> <input type="radio" name="origine" value="id" id="id" /> id </label>
+<input type="submit" class="btn btn-inverse active" value="Valide"/>
+</form>
+ </fieldset>
+ </div>
+ 
+ 
+ 
+ 
+ 
+<fieldset>
+<legend>Nouveau Sujet Tweet</legend>
+<!--<form method="post" action="at_routes.Categories.add()">-->
+ <form method="post" action="/commentaire/add">
+<input type="text" name="commentaire" class="form-control" placeholder="Commentaire"style="width: 1006px;">
+<input type="hidden" name="user" value="@user.name" >   
+<input type="hidden" name="cible" value="@user.name" > 
+<button class="btn btn-primary btn-sm dropdown-toggle" style="width:20px;height:26px;"><i class="icon-white icon-comment"></i></button></form> 
+</fieldset>
+
+
+<!-- Liste des  Sujet -->
+<ul>
+
+@if(commentaires.isEmpty) {
+  <h1> Nothing to display :</h1>
+   0 : resultats.
+} else {
+<!-- <legend> at_commentaires.size : resultat(s) trouvé(s) </legend> -->
+<p>
+<ul class="nav nav-pills nav-stacked">
+<li class="active">
+<a href="#"style="width:210px;height:15px;position:absolute;top: 320px;left: 60px;">
+<span class="badge pull-right" >@commentaires.size</span>resultat(s) trouvé(s)</a>
+</li>
+</ul>
+</p>
+     
+@for(category <- commentaires) {
+ <table class="table table-striped">
+
+						<tr >
+                        <td style="background-color:#B0C4DE;"><b>ID</b></td>
+                        <td style="background-color:#B0C4DE;"><b>Pseudo</b></td>
+                        <td style="background-color:#B0C4DE;"><b>Sujet</b></td>
+                        <td style="background-color:#B0C4DE;"><b>Date</b></td>
+                        
+                		</tr>
+                		
+						<tr>  
+   						 <td>@category.id </td>
+    					 <td>@category.user</td></a>   
+    					 <td>@category.commentaire</td>
+    					 <td>@category.date</td>
+   						</td> 
+     
+     
+     
+     
+ 
+    <td style="width: 10px; "> @helper.form(action = routes.Tweet1.delete(category.id)) {<button class="btn btn-primary btn-sm dropdown-toggle" style="width:20px;height:25px;"><i class="icon-white icon-trash"></i></button>} 
+    <td style="width: 10px; "> <a href="essai" id="category.id" class="btn btn-primary btn-mini active"><i class="icon-white icon-thumbs-up"></i> </a>
+   <td style="width: 10px; ">@helper.form(action = routes.Tweet1.Editer(category.commentaire)) {<button class="btn btn-primary btn-mini"><i class="icon-white icon-pencil"></i></button>}
+    <tr>
+    <form method="post" action="/commentaire/add/Scommentaire/">
+    <input class="form-control" type="text" name="souscommentaire"  placeholder="Scommentaire"style="width: 1006px;"> 
+        <input type="hidden" name="user" value="@user.name" > 
+        <input type="hidden" name="scommcible" value="@category.commentaire" >   
+        <button type= "submit" class="btn btn-danger btn-sm dropdown-toggle" style="width:20px;height:25px;"><i class="icon-white icon-plus-sign"></i></button>
+        </form> 
+    </tr>
+    
+    
+    </td>
+    </td> 
+   
+    </tr> 
+    </table>
+     
+     
+     <legend> Liste des commentaires </legend>
+    <table class="table table-striped">
+    <tr>
+    					<td><b>Id</b></td>
+                        <td><b>Pseudo</b></td>
+                        <td><b>Date</b></td>
+                        <td><b>Commentaire</b></td>
+                        
+                </tr>
+     @for(i <- Scommentaires){
+       @if(i.scommcible == category.commentaire){  
+        <tr>
+                        <td>@i.idd</td>
+                        <td>@i.user</td>
+                        <td>@i.date1</td>
+                        <td>@i.souscommentaire</td>
+                        
+                        
+    <td style="width: 10px; "> @helper.form(action = routes.Tweet1.delete2(i.idd)) {<button class="btn btn-danger btn-sm dropdown-toggle" style="width:20px;height:25px;"><i class="icon-white icon-trash"></i></button>} 
+    <td style="width: 10px; "> <button class="btn btn-danger btn-sm dropdown-toggle" style="width:20px;height:25px;"><i class="icon-white icon-thumbs-up"></i> </button>
+                </tr>
+        
+        
+     }
+     }
+     </table>
+     </br>
+}
+
+</br>
+}
+
+}
